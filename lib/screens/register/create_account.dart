@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _CreateAccountState extends State<CreateAccount> {
     screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: const Text('Register'),
         backgroundColor: Colors.black,
       ),
       body: Stack(
@@ -33,25 +34,24 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Scaffold buildRegister() {
     return Scaffold(
-        body: SafeArea(   
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buildImageProfile(),
-                buildUser(),
-                buildEmail(),
-                buildPassword(),
-                buildCreateAccount(),
-              ],
-            ),
-          ),
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            buildImageProfile(),
+            buildUser(),
+            buildEmail(),
+            buildPassword(),
+            buildCreateAccount(),
+          ],
         ),
+      ),
     ));
   }
 
-  Future<Null> chooseImage(ImageSource source) async {
+  Future<void> chooseImage(ImageSource source) async {
     try {
       // ignore: deprecated_member_use
       var result = await ImagePicker().getImage(
@@ -62,7 +62,9 @@ class _CreateAccountState extends State<CreateAccount> {
       setState(() {
         file = File(result!.path);
       });
-    } catch (e) {}
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   Row buildImageProfile() {
@@ -73,9 +75,9 @@ class _CreateAccountState extends State<CreateAccount> {
         Stack(
           children: [
             Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
+                margin: const EdgeInsets.symmetric(vertical: 20),
                 child: file == null
-                    ? CircleAvatar(
+                    ? const CircleAvatar(
                         backgroundImage: AssetImage('images/profileLogo.png'),
                         minRadius: 50,
                         maxRadius: 75,
@@ -86,12 +88,10 @@ class _CreateAccountState extends State<CreateAccount> {
                         maxRadius: 75,
                       )),
             Container(
-              margin: EdgeInsets.only(top:125
-              
-              ,left: 100),
-              child: IconButton( 
+              margin: const EdgeInsets.only(top: 125, left: 100),
+              child: IconButton(
                 onPressed: () => chooseImage(ImageSource.gallery),
-                icon: Icon(
+                icon: const Icon(
                   Icons.add_circle_rounded,
                   color: Colors.white,
                   size: 36,
@@ -106,39 +106,39 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Container buildCreateAccount() {
     return Container(
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         width: screenWidth! * 0.4,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              minimumSize: Size(100, 50),
+              minimumSize: const Size(100, 50),
               backgroundColor: Colors.orange,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
             ),
             onPressed: () {},
-            child: Text('Create Account')));
+            child: const Text('Create Account')));
   }
 
   Container buildUser() {
     return Container(
-        margin: EdgeInsets.only(top: 16),
+        margin: const EdgeInsets.only(top: 16),
         width: screenWidth! * 0.65,
         child: TextField(
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.orangeAccent,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.perm_identity,
               color: Colors.white,
             ),
-            labelStyle: TextStyle(color: Colors.white),
+            labelStyle: const TextStyle(color: Colors.white),
             labelText: 'Username:',
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(color: Colors.orange)),
+                borderSide: const BorderSide(color: Colors.orange)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(color: Colors.orange),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ));
@@ -146,24 +146,24 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Container buildEmail() {
     return Container(
-        margin: EdgeInsets.only(top: 16),
+        margin: const EdgeInsets.only(top: 16),
         width: screenWidth! * 0.65,
         child: TextField(
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.orangeAccent,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.email_outlined,
               color: Colors.white,
             ),
-            labelStyle: TextStyle(color: Colors.white),
+            labelStyle: const TextStyle(color: Colors.white),
             labelText: 'E-mail:',
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(color: Colors.orange)),
+                borderSide: const BorderSide(color: Colors.orange)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(color: Colors.orange),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ));
@@ -171,14 +171,14 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Container buildPassword() {
     return Container(
-        margin: EdgeInsets.only(top: 16),
+        margin: const EdgeInsets.only(top: 16),
         width: screenWidth! * 0.65,
         child: TextField(
           obscureText: redEye,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.orangeAccent,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.lock_outline,
               color: Colors.white,
             ),
@@ -194,14 +194,14 @@ class _CreateAccountState extends State<CreateAccount> {
                       : Icons.remove_red_eye_sharp,
                   color: Colors.white,
                 )),
-            labelStyle: TextStyle(color: Colors.white),
+            labelStyle: const TextStyle(color: Colors.white),
             labelText: 'Password:',
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(color: Colors.orange)),
+                borderSide: const BorderSide(color: Colors.orange)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(color: Colors.orange),
+              borderSide: const BorderSide(color: Colors.orange),
             ),
           ),
         ));
