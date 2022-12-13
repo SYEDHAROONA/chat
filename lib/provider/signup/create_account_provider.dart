@@ -11,7 +11,7 @@ class CreateAccountProvider extends ChangeNotifier {
   File? file;
 
   Future<bool> createAccount() async {
-    var url = Uri.parse('http://{ip}/api/users/upload');
+    var url = Uri.parse('http://192.168.42.161/api/users/upload');
     http.MultipartRequest request = http.MultipartRequest('POST', url);
     http.MultipartFile multipartFile =
         await http.MultipartFile.fromPath('file', file!.path);

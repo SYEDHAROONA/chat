@@ -12,7 +12,7 @@ class LoginProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    var url = Uri.parse('http:///**yourip/:3000/api/auth');
+    var url = Uri.parse('http:///192.168.42.161/:3000/api/auth');
     var response = await http.post(
       url,
       body: {'email': email, 'password': password},
